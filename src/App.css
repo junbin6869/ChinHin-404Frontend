@@ -1,0 +1,72 @@
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.navbar {
+  box-sizing: border-box;
+  background: white;
+  border-bottom: 1px solid #333;
+  height: 70px;
+  padding: 8px 40px;
+  margin: 0 auto;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center; /* Y-axis */ 
+  justify-content: space-between; /* X-axis */
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navbar-menu {
+  flex: 1;                    
+  display: flex;
+  justify-content: center;    
+  gap: 50px;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu li{
+  color: black;
+  cursor: pointer;
+}
+
+.navbar-menu li:hover{
+  color: grey;
+  cursor: pointer;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+}
+
+.nav-logo{
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.page{
+  padding-top: 80px;
+}
