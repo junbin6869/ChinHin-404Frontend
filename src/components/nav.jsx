@@ -1,26 +1,53 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import "../App.css";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+  const [email, setEmail] = useState("Loading...");
+  const cls = ({ isActive }) => `nav-link${isActive ? " active" : ""}`;
+/*
+  //Run when the page loaded
+  useEffect(()=>{
+    //
+    async function loadGmail(){
+      try{
+        const res = await callBackend("/");
+        if(!res.ok) throw new Error(`Error: ${res.status}`);
+        const gmail = await res.json();
+        setEmail(gmail.email ?? "user");
+      }
+      catch(error){
+        console.error("Failed to load:", error);
+        setEmail("Guest");
+      }
+    }
+
+    loadGmail();
+  },[]);
+*/
+
+
   return (
     <nav className="navbar">
-        <div className="navbar-left">
+      <div className="navbar-left">
+        <NavLink to = "/">
           <img src={Logo} alt="logo" className="nav-logo" />
-        </div>
+        </NavLink>
+      </div>
+      <ul className="navbar-menu">
+        <li>
+          <NavLink to="/copilot" className={cls}>Copilot</NavLink>
+        </li>
+        <li>
+          <NavLink to="/insight" className={cls}>Insight</NavLink>
+        </li>
+      </ul>
 
-        <ul className="navbar-menu">
-            <li>Customer Management</li>
-            <li>Project</li>
-            <li>Activities</li>
-            <li>Issue</li>
-            <li>insight</li>
-            <li></li>
-        </ul>
 
-        <div class="navbar-right">
-          <span class="username">junbin@gmail.com</span>
-        </div>
+      <div className="navbar-right">
+        <span className="username">{email}</span>
+      </div>
     </nav>
   );
 }
