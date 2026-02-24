@@ -3,7 +3,7 @@ import "./Copilot.css";
 
 const API_URL =
   import.meta.env.VITE_COPILOT_API_URL ||
-  "http://127.0.0.1:8000/api/copilot";
+  "https://404-e7hygxh9bqdudbhq.malaysiawest-01.azurewebsites.net/api/copilot";
 
 
 export default function Copilot() {
