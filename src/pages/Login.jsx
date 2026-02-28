@@ -4,7 +4,7 @@ import { setAuth } from "../auth";
 import "./Login.css";
 
 const API_BASE =
-  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api";
+  import.meta.env.VITE_API_BASE_URL || "https://404-e7hygxh9bqdudbhq.malaysiawest-01.azurewebsites.net/api";
 
 export default function Login() {
   const [role, setRole] = useState("promotion");
@@ -19,7 +19,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_BASE}/auth/login`, {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role, password }),
