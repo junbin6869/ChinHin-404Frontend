@@ -3,30 +3,36 @@ import "./Copilot.css";
 
 const API_URL =
   import.meta.env.VITE_COPILOT_API_URL ||
-  "https://404-e7hygxh9bqdudbhq.malaysiawest-01.azurewebsites.net/api/copilot";
-
+  "https://404-e7hygxh9bqdudbhq.malaysiawest-01.azurewebsites.net/";
 
 export default function Copilot() {
   const [input, setInput] = useState("");
+
   const [messages, setMessages] = useState(() => [
     {
       role: "assistant",
-      content: "Hi! I’m your Copilot. Tell me what you want to solve (procurement / promotion / document).",
+      content:
+        "Hi! I’m your Copilot. Tell me what you want to solve (procurement / promotion / document).",
     },
   ]);
+
+  // ✅ NEW: conversation id from backend
+  const [conversationId, setConversationId] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const listRef = useRef(null);
 
-  // auto scroll to bottom when messages change
   useEffect(() => {
     if (!listRef.current) return;
     listRef.current.scrollTop = listRef.current.scrollHeight;
   }, [messages, isLoading]);
 
-  const canSend = useMemo(() => input.trim().length > 0 && !isLoading, [input, isLoading]);
+  const canSend = useMemo(
+    () => input.trim().length > 0 && !isLoading,
+    [input, isLoading]
+  );
 
   async function send() {
     const text = input.trim();
@@ -36,19 +42,17 @@ export default function Copilot() {
     setInput("");
     setIsLoading(true);
 
-    // 1) optimistic add user message
     const nextMessages = [...messages, { role: "user", content: text }];
     setMessages(nextMessages);
 
     try {
-      // 2) call API
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        // ✅ Send conversation_id, first time can be null/undefined
         body: JSON.stringify({
           message: text,
-          // optional: pass conversation context
-          history: nextMessages.map((m) => ({ role: m.role, content: m.content })),
+          conversation_id: conversationId, // IMPORTANT
         }),
       });
 
@@ -57,12 +61,12 @@ export default function Copilot() {
         throw new Error(`HTTP ${res.status} ${res.statusText}${t ? ` - ${t}` : ""}`);
       }
 
-      // 3) parse response
-      // Expect either:
-      //  A) { reply: "..." }
-      //  B) { message: "..." }
-      //  C) OpenAI-style: { choices: [{ message: { content: "..." } }] }
       const data = await res.json();
+
+      // ✅ Save conversation_id returned by backend (first call)
+      if (!conversationId && data.conversation_id) {
+        setConversationId(data.conversation_id);
+      }
 
       const reply =
         data.reply ??
@@ -75,10 +79,7 @@ export default function Copilot() {
       setError(e?.message || "Request failed");
       setMessages((prev) => [
         ...prev,
-        {
-          role: "assistant",
-          content: "Sorry — I couldn’t reach the server. Please try again.",
-        },
+        { role: "assistant", content: "Sorry — I couldn’t reach the server. Please try again." },
       ]);
     } finally {
       setIsLoading(false);
@@ -92,13 +93,33 @@ export default function Copilot() {
     }
   }
 
+  // Optional: Start a new conversation (reset conversationId and messages)
+  function newChat() {
+    setConversationId(null);
+    setMessages([
+      {
+        role: "assistant",
+        content:
+          "Hi! I’m your Copilot. Tell me what you want to solve (procurement / promotion / document).",
+      },
+    ]);
+    setError("");
+    setInput("");
+  }
+
   return (
     <div className="copilot-root">
       <div className="copilot-header">
-        <div className="copilot-title">Copilot</div>
-        <div className="copilot-subtitle">
-          Ask anything — I’ll route to the right agent (Procurement / Promotion / Document).
+        <div className="copilot-text">
+          <div className="copilot-title">Copilot</div>
+          <div className="copilot-subtitle">
+            Ask anything — I’ll route to the right agent (Procurement / Promotion / Document).
+          </div>
         </div>
+
+        <button className="btn btn-primary" onClick={newChat}>
+          New Chat
+        </button>
       </div>
 
       <div className="chat-shell">
@@ -108,17 +129,13 @@ export default function Copilot() {
               key={idx}
               className={`chat-row ${m.role === "user" ? "is-user" : "is-assistant"}`}
             >
-              <div className="chat-bubble">
-                {m.content}
-              </div>
+              <div className="chat-bubble">{m.content}</div>
             </div>
           ))}
 
           {isLoading && (
             <div className="chat-row is-assistant">
-              <div className="chat-bubble chat-bubble-loading">
-                Thinking…
-              </div>
+              <div className="chat-bubble chat-bubble-loading">Thinking…</div>
             </div>
           )}
         </div>
@@ -137,10 +154,6 @@ export default function Copilot() {
           </button>
         </div>
 
-        {error && <div className="chat-error">⚠ {error}</div>}
-        <div className="chat-hint">
-          API: <code>{API_URL}</code>
-        </div>
       </div>
     </div>
   );

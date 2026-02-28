@@ -1,0 +1,86 @@
+.insight-root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header (match Copilot header vibe) */
+.insight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.insight-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.insight-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.insight-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Grid layout for cards */
+.insight-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Card styling (similar to chat-list feel) */
+.insight-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.insight-card__header {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eef2f7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.insight-card__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.insight-card__body {
+  padding: 14px;
+  font-size: 14px;
+  color: #111827;
+}
+
+/* Placeholder text */
+.insight-placeholder {
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* Empty / no access state */
+.insight-empty {
+  border: 1px dashed #d1d5db;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Responsive: if you later want 2 columns on wide screens */
+@media (min-width: 1000px) {
+  .insight-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

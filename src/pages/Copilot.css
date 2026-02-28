@@ -7,27 +7,32 @@
 /* Header */
 .copilot-header {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start; 
+  margin-bottom: 10px;
+}
+
+.copilot-text {
+  display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
 .copilot-title {
   font-size: 28px;
-  font-weight: 800;
-  color: #1f2937;
+  font-weight: 700;
+  margin-bottom: 6px;
 }
 
 .copilot-subtitle {
   font-size: 14px;
   color: #6b7280;
 }
-
 /* Chat shell (fills available space in your card) */
 .chat-shell {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  height: calc(100vh - 220px); /* 简单让 chat 有高度；你也可以按需改 */
+  height: calc(100vh - 220px); 
 }
 
 /* Messages */
