@@ -1,9 +1,8 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import "./Copilot.css";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const API_URL =
-  import.meta.env.VITE_COPILOT_API_URL ||
-  "https://404-e7hygxh9bqdudbhq.malaysiawest-01.azurewebsites.net/";
+const API_URL = `${BASE_URL}/copilot`;
 
 export default function Copilot() {
   const [input, setInput] = useState("");
