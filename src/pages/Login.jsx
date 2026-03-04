@@ -19,7 +19,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_BASE}/api/auth/login`, {
+      const res = await fetch(`${API_BASE}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role, password }),
@@ -58,7 +58,6 @@ export default function Login() {
           >
             <option value="promotion">promotion</option>
             <option value="procurement">procurement</option>
-            <option value="document">document</option>
             <option value="admin">admin</option>
           </select>
         </div>

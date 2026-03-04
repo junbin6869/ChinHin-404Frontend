@@ -1,14 +1,19 @@
+/* =========================
+   Insight Page Base
+   ========================= */
+
 .insight-root {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  height: calc(100vh - var(--header-h, 72px));
+  overflow-y: auto;
+  padding: 24px;
+  box-sizing: border-box;
 }
 
-/* Header (match Copilot header vibe) */
 .insight-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin-bottom: 16px;
 }
 
 .insight-text {
@@ -17,34 +22,37 @@
 }
 
 .insight-title {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 6px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
 }
 
 .insight-subtitle {
-  font-size: 14px;
-  color: #6b7280;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #666;
 }
 
 /* Grid layout for cards */
 .insight-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 16px;
 }
 
-/* Card styling (similar to chat-list feel) */
+/* Card styling */
 .insight-card {
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  background: #fff;
   overflow: hidden;
 }
 
 .insight-card__header {
-  padding: 12px 14px;
-  border-bottom: 1px solid #eef2f7;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.02);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,23 +60,129 @@
 
 .insight-card__title {
   font-size: 14px;
-  font-weight: 700;
-  color: #111827;
+  font-weight: 800;
+  color: #111;
 }
 
 .insight-card__body {
-  padding: 14px;
+  padding: 16px;
   font-size: 14px;
-  color: #111827;
+  color: #111;
 }
 
-/* Placeholder text */
-.insight-placeholder {
-  color: #6b7280;
-  line-height: 1.5;
+.insight-blocktitle {
+  font-size: 13px;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 10px;
 }
 
-/* Empty / no access state */
+.insight-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+  margin: 16px 0;
+}
+
+/* =========================
+   Procurement Insight UI
+========================= */
+
+.proc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.proc-row {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.proc-row__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 14px;
+  color: #111;
+}
+
+.proc-chip {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.04);
+  color: #222;
+}
+
+.proc-row__meta {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.66);
+}
+
+.proc-row__desc {
+  margin-top: 6px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.82);
+  line-height: 1.35;
+}
+
+.proc-ai {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.proc-ai__section {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.proc-ai__title {
+  font-size: 13px;
+  font-weight: 900;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.proc-ai__item {
+  padding: 8px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.86);
+}
+
+.proc-ai__item:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.proc-ai__reason {
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.66);
+}
+
+.insight-muted {
+  font-size: 13px;
+  color: #666;
+}
+
+.insight-error {
+  font-size: 13px;
+  color: #b00020;
+}
+
 .insight-empty {
   border: 1px dashed #d1d5db;
   background: #ffffff;
@@ -78,9 +192,262 @@
   font-size: 14px;
 }
 
-/* Responsive: if you later want 2 columns on wide screens */
+/* Actions */
+.insight-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.insight-actions__hint {
+  font-size: 12px;
+  color: #666;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary {
+  background: #111;
+  color: #fff;
+}
+
+.btn-primary:disabled {
+  background: rgba(0, 0, 0, 0.08);
+  color: #333;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: #111;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =============================
+   Promotion Bar Chart (match screenshot)
+   - No "Net Sales" label
+   - No x-axis baseline
+   - Hover tooltip shows value
+   - X labels below and fully visible (wrap)
+   ============================= */
+
+:root {
+  --pb-xlabel-space: 64px;
+}
+
+.pb-wrap {
+  width: 100%;
+}
+
+.pb-plot {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  column-gap: 12px;
+  align-items: stretch;
+  padding: 8px 6px 2px;
+}
+
+.pb-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* ✅ 现在 labels 不在 plot 里了，所以不用 padding-bottom 预留 */
+  padding-bottom: 0;
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 13px;
+  user-select: none;
+}
+
+.pb-y-tick {
+  text-align: right;
+  line-height: 1;
+}
+
+.pb-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Plot area */
+.pb-area {
+  position: relative;
+  height: 320px;
+}
+
+.pb-grid {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.pb-grid-line {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* ✅ remove x-axis baseline (0 line) */
+.pb-grid-line:last-child {
+  display: none;
+}
+
+.pb-bars {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 32px;
+  padding: 0 10px;
+}
+
+.pb-col {
+  width: 64px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Hover tooltip */
+.pb-barwrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.pb-bar {
+  width: 100%;
+  background: #3b73b9;
+  border-radius: 6px 6px 0 0;
+  transition: filter 120ms ease, transform 120ms ease;
+}
+
+.pb-barwrap:hover .pb-bar {
+  filter: brightness(0.92);
+  transform: translateY(-1px);
+}
+
+.pb-barwrap::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.78);
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.pb-barwrap::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.78);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.pb-barwrap:hover::after,
+.pb-barwrap:hover::before {
+  opacity: 1;
+}
+
+/* ✅ X labels row is OUTSIDE plot */
+.pb-xrow {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 10px 10px 0;
+}
+
+.pb-xcol {
+  width: 64px;
+  display: flex;
+  justify-content: center;
+}
+
+.pb-xlabel {
+  width: 120px;
+  max-width: 120px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.55);
+  text-align: center;
+  white-space: normal;
+  white-space: nowrap;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+.pb-muted {
+  color: #777;
+  font-size: 14px;
+}
+
+@media (max-width: 560px) {
+  .pb-bars,
+  .pb-xrow {
+    gap: 18px;
+    padding: 0 6px;
+  }
+
+  .pb-col,
+  .pb-xcol {
+    width: 52px;
+  }
+
+  .pb-xlabel {
+    width: 96px;
+    max-width: 96px;
+  }
+}
+
+.approve-btn{
+  margin-top:8px;
+  padding:5px 12px;
+  background:#2e7d32;
+  color:white;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.approve-btn:hover{
+  background:#1b5e20;
+}
+
 @media (min-width: 1000px) {
   .insight-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }

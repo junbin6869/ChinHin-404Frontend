@@ -11,7 +11,7 @@ export default function Copilot() {
     {
       role: "assistant",
       content:
-        "Hi! I’m your Copilot. Tell me what you want to solve (procurement / promotion / document).",
+        "Hi! I’m your Copilot. Tell me what you want to solve (procurement / promotion).",
     },
   ]);
 
@@ -75,6 +75,7 @@ export default function Copilot() {
 
       setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
     } catch (e) {
+      console.error("Server error:", e);
       setError(e?.message || "Request failed");
       setMessages((prev) => [
         ...prev,
@@ -99,7 +100,7 @@ export default function Copilot() {
       {
         role: "assistant",
         content:
-          "Hi! I’m your Copilot. Tell me what you want to solve (procurement / promotion / document).",
+          "Hi! I’m your Copilot. Tell me what you want to solve (procurement / promotion).",
       },
     ]);
     setError("");
@@ -112,7 +113,7 @@ export default function Copilot() {
         <div className="copilot-text">
           <div className="copilot-title">Copilot</div>
           <div className="copilot-subtitle">
-            Ask anything — I’ll route to the right agent (Procurement / Promotion / Document).
+            Ask anything — I’ll route to the right agent (Procurement / Promotion).
           </div>
         </div>
 
