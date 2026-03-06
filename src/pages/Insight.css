@@ -87,6 +87,34 @@
    Procurement Insight UI
 ========================= */
 
+.proc-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.proc-summary__card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.proc-summary__label {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.62);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.proc-summary__value {
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 900;
+  color: #111;
+}
+
 .proc-list {
   display: flex;
   flex-direction: column;
@@ -449,5 +477,60 @@
 @media (min-width: 1000px) {
   .insight-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.proc-row__reason {
+  color: rgba(0, 0, 0, 0.66);
+}
+
+.pb-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+}
+
+.pb-plot {
+  min-width: 100%;
+}
+
+.pb-y-axis {
+  min-height: 320px;
+}
+
+.pb-xlabel {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .insight-root {
+    padding: 14px;
+  }
+
+  .proc-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .pb-area {
+    height: 260px;
+  }
+
+  .pb-bars,
+  .pb-xrow {
+    gap: 18px;
+  }
+
+  .pb-col,
+  .pb-xcol {
+    width: 56px;
+  }
+
+  .pb-xlabel {
+    width: 86px;
+    max-width: 86px;
+    font-size: 12px;
   }
 }
