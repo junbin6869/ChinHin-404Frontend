@@ -222,22 +222,31 @@ export default function Insight() {
     }
   };
 
-  const approvePO = async (poId) => {
-    try {
-      await callBackend(`/approve/${poId}`, { method: "POST" });
-      await refreshProcurementLists();
-      setProcAIResult((prev) =>
-        prev
-          ? {
-              ...prev,
-              approval_message: prev.approval_message,
-            }
-          : prev
-      );
-    } catch (e) {
-      setProcAIError(e?.message || "Approve failed.");
-    }
-  };
+const approvePO = async (poId) => {
+  const ok = window.confirm(`Are you sure you want to approve PR ${poId}?`);
+  if (!ok) return;
+
+  try {
+    const res = await callBackend(`/approve/${poId}`, { method: "POST" });
+
+    await refreshProcurementLists();
+
+    setProcAIResult((prev) =>
+      prev
+        ? {
+            ...prev,
+            approval_message: res?.message || `PR ${poId} has been approved successfully.`,
+          }
+        : prev
+    );
+
+    alert(res?.message || `PR ${poId} has been approved successfully.`);
+  } catch (e) {
+    const msg = e?.message || "Approve failed.";
+    setProcAIError(msg);
+    alert(msg);
+  }
+};
 
   return (
     <div className="insight-root">
@@ -346,7 +355,7 @@ export default function Insight() {
 
                     <div className="insight-actions">
                       <button className="btn-primary" onClick={runProcurementAI} disabled={procAILoading}>
-                        {procAILoading ? "Analyzing…" : "Run AI Insight"}
+                        {procAILoading ? "Analyzing…" : "Show AI Insight"}
                       </button>
 
                       <button
@@ -412,7 +421,7 @@ export default function Insight() {
                       </div>
                     ) : (
                       <div className="insight-muted">
-                        Click <b>Run AI Insight</b> to generate replenishment actions.
+                        Click <b>Show AI Insight</b> to generate replenishment actions.
                       </div>
                     )}
                   </>
