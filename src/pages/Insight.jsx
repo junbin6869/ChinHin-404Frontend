@@ -459,7 +459,7 @@ const approvePO = async (poId) => {
                       </button>
 
                       <div className="insight-actions__hint">
-                        * AI insight only runs when you click (save tokens).
+                        * AI insight only shows when you click (save tokens).
                       </div>
                     </div>
 
