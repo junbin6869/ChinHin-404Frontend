@@ -505,6 +505,31 @@
   overflow-wrap: anywhere;
 }
 
+/* Tooltip for promotion bar */
+
+.pb-barwrap {
+  position: relative;
+}
+
+.pb-barwrap:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+
+  white-space: nowrap;
+  margin-bottom: 6px;
+
+  pointer-events: none;
+}
+
 @media (max-width: 560px) {
   .insight-root {
     padding: 14px;
