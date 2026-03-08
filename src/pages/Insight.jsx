@@ -370,7 +370,7 @@ const approvePO = async (poId) => {
                       </button>
 
                       <div className="insight-actions__hint">
-                        * AI insight only runs when you click (save tokens).
+                        * AI insight only shows when you click (save tokens).
                       </div>
                     </div>
 
@@ -444,7 +444,7 @@ const approvePO = async (poId) => {
 
                     <div className="insight-actions">
                       <button className="btn-primary" onClick={runMonitor} disabled={monitorLoading || !promoItems.length}>
-                        {monitorLoading ? "Analyzing…" : "Run AI Insight"}
+                        {monitorLoading ? "Analyzing…" : "Show AI Insight"}
                       </button>
 
                       <button
@@ -470,7 +470,7 @@ const approvePO = async (poId) => {
                       <div className="insight-monitor">{monitorText}</div>
                     ) : (
                       <div className="insight-muted">
-                        Click <b>Run AI Insight</b> to analyze the promotions.
+                        Click <b>Show AI Insight</b> to analyze the promotions.
                       </div>
                     )}
                   </>
