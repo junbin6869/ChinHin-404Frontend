@@ -46,7 +46,7 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
   background: #fff;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .insight-card__header {
