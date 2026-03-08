@@ -509,25 +509,44 @@
 
 .pb-barwrap {
   position: relative;
+  overflow: visible;
 }
 
 .pb-barwrap:hover::after {
   content: attr(data-tip);
   position: absolute;
-  bottom: 100%;
+  bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-  
   background: #111;
   color: #fff;
   font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 4px;
-
+  line-height: 1;
+  padding: 6px 8px;
+  border-radius: 6px;
   white-space: nowrap;
-  margin-bottom: 6px;
-
+  z-index: 9999;
   pointer-events: none;
+}
+
+.pb-barwrap:hover::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 5px 0 5px;
+  border-style: solid;
+  border-color: #111 transparent transparent transparent;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.pb-chart,
+.pb-plot,
+.pb-bars,
+.pb-barwrap {
+  overflow: visible;
 }
 
 @media (max-width: 560px) {
